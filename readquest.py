@@ -2,14 +2,11 @@
 
 def parseHeader(fileName, nameList):
     with open(fileName, "r") as f:
-        s = f.readlines(1)[0].split()
-        vals = [float(x) for x in s]
+        s = f.readline().split()
+        vals = [int(x) for x in s]
     # print(s, len(vals), len(nameList))
     assert len(vals) == len(nameList)
-    d = dict()
-    for i in range(0, len(nameList)):
-        d[nameList[i]] = vals[i]
-    return d
+    return dict(zip(nameList, vals))
 
 def parseFile(fileName, skipNumOfHeaderLines):
     data = []
@@ -18,7 +15,7 @@ def parseFile(fileName, skipNumOfHeaderLines):
         for line in f:
             s = line.split()
             # SAME as: data.append(list(map(float, s)))
-            data.append([float(x) for x in s])
+            data.append([int(x) for x in s])
     return data
 
 if __name__ == "__main__":
